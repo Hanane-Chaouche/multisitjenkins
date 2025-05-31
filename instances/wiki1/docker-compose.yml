@@ -1,0 +1,41 @@
+# Test déclenchement GitHub Actions
+
+services:
+  db:
+    image: postgres:13
+    restart: always
+    environment:
+      POSTGRES_DB: wikijs1
+      POSTGRES_USER: wikijs
+      POSTGRES_PASSWORD: wikijs123
+    volumes:
+      - db-wiki1:/var/lib/postgresql/data
+    networks:
+      - wikinet1
+  wikijs:
+    image: requarks/wiki:2
+    restart: always
+    ports:
+      - "3001:3000"
+    environment:
+      DB_TYPE: postgres
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: wikijs
+      DB_PASS: wikijs123
+      DB_NAME: wikijs1
+    depends_on:
+      - db
+    volumes:
+      - wiki1-data:/wiki/data
+    networks:
+      - wikinet1
+
+volumes:
+  db-wiki1:
+  wiki1-data:
+
+networks:
+  wikinet1:
+    external: true
+
