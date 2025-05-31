@@ -1,0 +1,24 @@
+
+services:
+  nginx:
+    image: nginx:latest
+    restart: always
+    container_name: nginx
+    ports:
+      - "80:80"     # HTTP
+      - "443:443"   # HTTPS
+    volumes:
+      - ./wikijs.conf:/etc/nginx/conf.d/default.conf      # Config Nginx pour les domaines
+      - /etc/letsencrypt:/etc/letsencrypt:ro              # Certificats SSL en lecture seule
+    networks:
+      - wikinet1
+      - wikinet2
+      - wikinet3
+
+networks:
+  wikinet1:
+    external: true
+  wikinet2:
+    external: true
+  wikinet3:
+    external: true
