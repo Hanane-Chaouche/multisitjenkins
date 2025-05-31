@@ -3,7 +3,7 @@ pipeline {
 
   environment {
     // ID de la clé privée ajoutée dans Jenkins (Manage Jenkins > Credentials)
-    SSH_KEY_ID = 'cle-ssh-jenkins'
+    SSH_KEY_ID = 'd5282778-63a2-4efc-a800-2122a66e28f7'
 
     // Configuration de ta VM
     REMOTE_HOST = '4.206.99.81'
